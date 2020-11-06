@@ -9,8 +9,8 @@ package packaging_test
 import (
 	"errors"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/packaging"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/packaging/mock"
+	"github.com/Hnampk/fabric-usable-internal/peer/packaging"
+	"github.com/Hnampk/fabric-usable-internal/peer/packaging/mock"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

@@ -16,8 +16,8 @@ import (
 	"strings"
 	"sync"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/identity"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-chaincode-go/shim"

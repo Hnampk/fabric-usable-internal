@@ -15,9 +15,9 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/peer/blocksprovider"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/peer/blocksprovider/fake"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/peer/orderers"
+	"github.com/Hnampk/fabric-usable-internal/pkg/peer/blocksprovider"
+	"github.com/Hnampk/fabric-usable-internal/pkg/peer/blocksprovider/fake"
+	"github.com/Hnampk/fabric-usable-internal/pkg/peer/orderers"
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/gossip"

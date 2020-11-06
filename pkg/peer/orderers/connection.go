@@ -13,7 +13,7 @@ import (
 	"math/rand"
 	"sync"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/comm"
+	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
 
 	"github.com/hyperledger/fabric/common/flogging"
 

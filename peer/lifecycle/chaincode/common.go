@@ -12,7 +12,7 @@ import (
 	"fmt"
 	"io"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/chaincode"
+	"github.com/Hnampk/fabric-usable-internal/peer/chaincode"
 
 	"github.com/golang/protobuf/proto"
 	pb "github.com/hyperledger/fabric-protos-go/peer"

@@ -15,7 +15,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/peer/orderers"
+	"github.com/Hnampk/fabric-usable-internal/pkg/peer/orderers"
 
 	"github.com/hyperledger/fabric/common/flogging"
 )

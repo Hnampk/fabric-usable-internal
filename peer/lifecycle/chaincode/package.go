@@ -14,7 +14,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/packaging"
+	"github.com/Hnampk/fabric-usable-internal/peer/packaging"
 
 	"github.com/hyperledger/fabric/core/chaincode/persistence"
 	"github.com/pkg/errors"

@@ -12,7 +12,7 @@ import (
 	"os"
 	"testing"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/bccsp/sw"
@@ -63,7 +63,7 @@ func TestInstallBadVersion(t *testing.T) {
 	cmd, _ := initInstallTest(t, fsPath, nil, nil)
 	defer cleanupInstallTest(fsPath)
 
-	args := []string{"-n", "mychaincode", "-p", "multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/chaincode/testdata/src/chaincodes/noop"}
+	args := []string{"-n", "mychaincode", "-p", "github.com/Hnampk/fabric-usable-internal/peer/chaincode/testdata/src/chaincodes/noop"}
 	cmd.SetArgs(args)
 
 	if err := cmd.Execute(); err == nil {
@@ -78,7 +78,7 @@ func TestInstallNonExistentCC(t *testing.T) {
 	cmd, _ := initInstallTest(t, fsPath, nil, nil)
 	defer cleanupInstallTest(fsPath)
 
-	args := []string{"-n", "badmychaincode", "-p", "multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/chaincode/testdata/src/chaincodes/bad_mychaincode", "-v", "testversion"}
+	args := []string{"-n", "badmychaincode", "-p", "github.com/Hnampk/fabric-usable-internal/peer/chaincode/testdata/src/chaincodes/bad_mychaincode", "-v", "testversion"}
 	cmd.SetArgs(args)
 
 	if err := cmd.Execute(); err == nil {
@@ -151,7 +151,7 @@ func installCC(t *testing.T) error {
 	cmd, _ := initInstallTest(t, fsPath, nil, nil)
 	defer cleanupInstallTest(fsPath)
 
-	args := []string{"-n", "mychaincode", "-p", "multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/chaincode/testdata/src/chaincodes/noop", "-v", "anotherversion"}
+	args := []string{"-n", "mychaincode", "-p", "github.com/Hnampk/fabric-usable-internal/peer/chaincode/testdata/src/chaincodes/noop", "-v", "anotherversion"}
 	cmd.SetArgs(args)
 
 	if err := cmd.Execute(); err != nil {

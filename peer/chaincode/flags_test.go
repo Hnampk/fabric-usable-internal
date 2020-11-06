@@ -9,7 +9,7 @@ package chaincode
 import (
 	"testing"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
 
 	"github.com/hyperledger/fabric/bccsp/sw"
 	"github.com/spf13/cobra"

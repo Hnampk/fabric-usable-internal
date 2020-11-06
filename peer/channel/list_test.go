@@ -10,7 +10,7 @@ import (
 	"errors"
 	"testing"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
 
 	"github.com/golang/protobuf/proto"
 	pb "github.com/hyperledger/fabric-protos-go/peer"

@@ -10,8 +10,9 @@ import (
 	"fmt"
 	"time"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/packaging"
+	"github.com/Hnampk/fabric-usable-internal/peer/packaging"
+
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
 
 	"github.com/hyperledger/fabric/bccsp"
 	"github.com/hyperledger/fabric/common/flogging"

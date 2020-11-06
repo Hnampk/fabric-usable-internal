@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/spf13/viper"

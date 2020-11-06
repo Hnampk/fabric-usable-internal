@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package node
 
 import (
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
 
 	"github.com/hyperledger/fabric/core/ledger/kvledger"
 	"github.com/pkg/errors"

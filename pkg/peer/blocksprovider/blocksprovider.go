@@ -12,8 +12,8 @@ import (
 	"math"
 	"time"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/identity"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/peer/orderers"
+	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
+	"github.com/Hnampk/fabric-usable-internal/pkg/peer/orderers"
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/gossip"

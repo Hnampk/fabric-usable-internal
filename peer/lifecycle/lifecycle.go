@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package lifecycle
 
 import (
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/lifecycle/chaincode"
+	"github.com/Hnampk/fabric-usable-internal/peer/lifecycle/chaincode"
 
 	"github.com/hyperledger/fabric/bccsp"
 	"github.com/spf13/cobra"

@@ -4,8 +4,8 @@ package fake
 import (
 	"sync"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/peer/blocksprovider"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/peer/orderers"
+	"github.com/Hnampk/fabric-usable-internal/pkg/peer/blocksprovider"
+	"github.com/Hnampk/fabric-usable-internal/pkg/peer/orderers"
 )
 
 type OrdererConnectionSource struct {

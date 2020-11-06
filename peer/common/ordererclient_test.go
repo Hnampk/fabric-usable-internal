@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/comm"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
 
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"

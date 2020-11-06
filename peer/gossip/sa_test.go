@@ -10,7 +10,7 @@ package gossip
 import (
 	"testing"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/gossip/mocks"
+	"github.com/Hnampk/fabric-usable-internal/peer/gossip/mocks"
 
 	"github.com/hyperledger/fabric/msp"
 	"github.com/stretchr/testify/assert"

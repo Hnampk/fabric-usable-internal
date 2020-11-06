@@ -9,7 +9,7 @@ import (
 	"context"
 	"crypto/tls"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/comm"
+	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
 
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/pkg/errors"

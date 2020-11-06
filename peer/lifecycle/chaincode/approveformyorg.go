@@ -11,8 +11,8 @@ import (
 	"crypto/tls"
 	"time"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/chaincode"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/peer/chaincode"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
 
 	"github.com/golang/protobuf/proto"
 	cb "github.com/hyperledger/fabric-protos-go/common"

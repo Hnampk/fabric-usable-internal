@@ -10,8 +10,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/lifecycle/chaincode"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/lifecycle/chaincode/mock"
+	"github.com/Hnampk/fabric-usable-internal/peer/lifecycle/chaincode"
+	"github.com/Hnampk/fabric-usable-internal/peer/lifecycle/chaincode/mock"
 
 	"github.com/golang/protobuf/proto"
 	pb "github.com/hyperledger/fabric-protos-go/peer"

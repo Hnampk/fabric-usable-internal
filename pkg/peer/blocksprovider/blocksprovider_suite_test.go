@@ -12,7 +12,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/identity"
+	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
 
 	"github.com/hyperledger/fabric-protos-go/orderer"
 )

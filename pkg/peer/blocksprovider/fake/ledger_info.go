@@ -4,7 +4,7 @@ package fake
 import (
 	"sync"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/peer/blocksprovider"
+	"github.com/Hnampk/fabric-usable-internal/pkg/peer/blocksprovider"
 )
 
 type LedgerInfo struct {

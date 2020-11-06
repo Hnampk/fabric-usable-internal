@@ -9,7 +9,7 @@ package packaging_test
 import (
 	"testing"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/packaging"
+	"github.com/Hnampk/fabric-usable-internal/peer/packaging"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

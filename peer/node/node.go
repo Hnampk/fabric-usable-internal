@@ -8,7 +8,7 @@ package node
 import (
 	"fmt"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
 
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/spf13/cobra"

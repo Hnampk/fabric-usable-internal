@@ -13,8 +13,8 @@ import (
 	"testing"
 	"time"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/chaincode/mock"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/peer/chaincode/mock"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"

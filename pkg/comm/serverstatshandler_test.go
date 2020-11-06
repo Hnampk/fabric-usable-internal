@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/comm"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/comm/testpb"
+	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
+	"github.com/Hnampk/fabric-usable-internal/pkg/comm/testpb"
 
 	"github.com/hyperledger/fabric/common/metrics"
 	"github.com/hyperledger/fabric/common/metrics/metricsfakes"

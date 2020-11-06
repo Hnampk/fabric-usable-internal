@@ -9,7 +9,7 @@ package chaincode
 import (
 	"io/ioutil"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/identity"
+	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
 
 	"github.com/golang/protobuf/proto"
 	pcommon "github.com/hyperledger/fabric-protos-go/common"

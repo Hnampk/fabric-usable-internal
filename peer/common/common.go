@@ -15,7 +15,7 @@ import (
 	"strings"
 	"time"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/comm"
+	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
 
 	pcommon "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"

@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"time"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/identity"
+	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
 
 	pcommon "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric/bccsp"

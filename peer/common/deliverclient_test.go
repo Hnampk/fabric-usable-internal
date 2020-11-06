@@ -12,8 +12,8 @@ import (
 	"sync"
 	"testing"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common/mock"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/identity"
+	"github.com/Hnampk/fabric-usable-internal/peer/common/mock"
+	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	ab "github.com/hyperledger/fabric-protos-go/orderer"

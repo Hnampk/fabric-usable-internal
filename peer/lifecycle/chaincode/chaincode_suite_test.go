@@ -11,8 +11,8 @@ import (
 	"os"
 	"testing"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/lifecycle/chaincode"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/peer/lifecycle/chaincode"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/common/flogging"

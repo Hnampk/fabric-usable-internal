@@ -12,7 +12,7 @@ import (
 	"io/ioutil"
 	"time"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/comm"
+	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/core/config"

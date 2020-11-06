@@ -9,7 +9,7 @@ package channel
 import (
 	"testing"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

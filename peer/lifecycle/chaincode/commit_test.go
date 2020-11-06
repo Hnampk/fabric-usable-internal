@@ -11,8 +11,8 @@ import (
 	"crypto/tls"
 	"time"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/lifecycle/chaincode"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/lifecycle/chaincode/mock"
+	"github.com/Hnampk/fabric-usable-internal/peer/lifecycle/chaincode"
+	"github.com/Hnampk/fabric-usable-internal/peer/lifecycle/chaincode/mock"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/bccsp/sw"

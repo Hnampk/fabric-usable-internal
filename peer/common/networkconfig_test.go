@@ -9,7 +9,7 @@ package common_test
 import (
 	"testing"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
 
 	"github.com/stretchr/testify/assert"
 )

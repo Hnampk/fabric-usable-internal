@@ -20,11 +20,11 @@ import (
 	signerLib "github.com/hyperledger/fabric/cmd/common/signer"
 	"google.golang.org/grpc"
 
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/configtxgen/encoder"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/configtxgen/genesisconfig"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/chaincode/mock"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/common"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/identity"
+	"github.com/Hnampk/fabric-usable-internal/configtxgen/encoder"
+	"github.com/Hnampk/fabric-usable-internal/configtxgen/genesisconfig"
+	"github.com/Hnampk/fabric-usable-internal/peer/chaincode/mock"
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
 
 	"github.com/golang/protobuf/proto"
 	cb "github.com/hyperledger/fabric-protos-go/common"

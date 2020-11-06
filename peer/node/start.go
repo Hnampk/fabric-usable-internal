@@ -20,9 +20,9 @@ import (
 	"syscall"
 	"time"
 
-	peergossip "multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/gossip"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/peer/version"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/comm"
+	peergossip "github.com/Hnampk/fabric-usable-internal/peer/gossip"
+	"github.com/Hnampk/fabric-usable-internal/peer/version"
+	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
 
 	docker "github.com/fsouza/go-dockerclient"
 	"github.com/golang/protobuf/proto"

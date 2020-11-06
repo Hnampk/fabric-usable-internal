@@ -5,8 +5,8 @@ import (
 	"crypto/x509"
 	"sync"
 
+	"github.com/Hnampk/fabric-usable-internal/pkg/peer/blocksprovider"
 	"google.golang.org/grpc"
-	"multiorg-network/custom-sdk/fabric/usable-inter-nal/pkg/peer/blocksprovider"
 )
 
 type Dialer struct {
