@@ -9,6 +9,7 @@ package chaincode
 import (
 	"io/ioutil"
 
+	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
 	"github.com/golang/protobuf/proto"
 	pcommon "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
@@ -16,7 +17,6 @@ import (
 	"github.com/hyperledger/fabric/bccsp/factory"
 	"github.com/hyperledger/fabric/common/policydsl"
 	"github.com/hyperledger/fabric/core/common/ccpackage"
-	"github.com/hyperledger/fabric/internal/pkg/identity"
 	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/pkg/errors"

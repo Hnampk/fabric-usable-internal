@@ -5,7 +5,7 @@ import (
 	"crypto/x509"
 	"sync"
 
-	"github.com/hyperledger/fabric/internal/pkg/peer/blocksprovider"
+	"github.com/Hnampk/fabric-usable-internal/pkg/peer/blocksprovider"
 	"google.golang.org/grpc"
 )
 

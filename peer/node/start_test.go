@@ -14,10 +14,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/Hnampk/fabric-usable-internal/peer/node/mock"
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric/core/handlers/library"
 	"github.com/hyperledger/fabric/core/testutil"
-	"github.com/hyperledger/fabric/internal/peer/node/mock"
 	msptesttools "github.com/hyperledger/fabric/msp/mgmt/testtools"
 	"github.com/mitchellh/mapstructure"
 	. "github.com/onsi/gomega"

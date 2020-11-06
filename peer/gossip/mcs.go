@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
 	pcommon "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric/bccsp"
 	"github.com/hyperledger/fabric/common/flogging"
@@ -18,7 +19,6 @@ import (
 	"github.com/hyperledger/fabric/common/util"
 	"github.com/hyperledger/fabric/gossip/api"
 	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/internal/pkg/identity"
 	"github.com/hyperledger/fabric/msp"
 	"github.com/hyperledger/fabric/msp/mgmt"
 	"github.com/hyperledger/fabric/protoutil"

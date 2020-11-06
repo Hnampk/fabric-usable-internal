@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/ginkgo/extensions/table"
 	. "github.com/onsi/gomega"
 
+	"github.com/Hnampk/fabric-usable-internal/configtxgen/encoder"
+	"github.com/Hnampk/fabric-usable-internal/configtxgen/genesisconfig"
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric/bccsp/sw"
 	"github.com/hyperledger/fabric/common/channelconfig"
 	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/internal/configtxgen/encoder"
-	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
 
 	"github.com/pkg/errors"
 )

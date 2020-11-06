@@ -12,8 +12,8 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
+	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
 	"github.com/hyperledger/fabric-protos-go/orderer"
-	"github.com/hyperledger/fabric/internal/pkg/identity"
 )
 
 //go:generate counterfeiter -o fake/signer.go --fake-name Signer . signer

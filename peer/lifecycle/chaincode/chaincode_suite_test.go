@@ -11,9 +11,9 @@ import (
 	"os"
 	"testing"
 
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/peer/lifecycle/chaincode"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/internal/peer/common"
-	"github.com/hyperledger/fabric/internal/peer/lifecycle/chaincode"
 	msptesttools "github.com/hyperledger/fabric/msp/mgmt/testtools"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

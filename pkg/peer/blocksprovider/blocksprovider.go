@@ -12,13 +12,13 @@ import (
 	"math"
 	"time"
 
+	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
+	"github.com/Hnampk/fabric-usable-internal/pkg/peer/orderers"
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/gossip"
 	"github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/hyperledger/fabric/common/flogging"
 	gossipcommon "github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/internal/pkg/identity"
-	"github.com/hyperledger/fabric/internal/pkg/peer/orderers"
 	"github.com/hyperledger/fabric/protoutil"
 
 	"github.com/golang/protobuf/proto"

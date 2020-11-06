@@ -16,6 +16,8 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
+	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-chaincode-go/shim"
 	pcommon "github.com/hyperledger/fabric-protos-go/common"
@@ -24,8 +26,6 @@ import (
 	"github.com/hyperledger/fabric/bccsp"
 	"github.com/hyperledger/fabric/common/policydsl"
 	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/internal/peer/common"
-	"github.com/hyperledger/fabric/internal/pkg/identity"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"

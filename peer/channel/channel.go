@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/internal/peer/common"
 	"github.com/hyperledger/fabric/msp"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"

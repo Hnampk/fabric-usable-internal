@@ -8,8 +8,8 @@ package node
 import (
 	"fmt"
 
+	"github.com/Hnampk/fabric-usable-internal/peer/common"
 	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/internal/peer/common"
 	"github.com/spf13/cobra"
 )
 

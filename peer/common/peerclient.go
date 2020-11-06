@@ -12,9 +12,9 @@ import (
 	"io/ioutil"
 	"time"
 
+	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/core/config"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 )

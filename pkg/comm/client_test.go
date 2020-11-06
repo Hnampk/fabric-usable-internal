@@ -19,11 +19,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
+	"github.com/Hnampk/fabric-usable-internal/pkg/comm/testpb"
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric/common/crypto/tlsgen"
 	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
-	"github.com/hyperledger/fabric/internal/pkg/comm/testpb"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

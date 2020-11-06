@@ -17,7 +17,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/internal/pkg/comm/testpb"
+	"github.com/Hnampk/fabric-usable-internal/pkg/comm/testpb"
 	"github.com/stretchr/testify/assert"
 )
 

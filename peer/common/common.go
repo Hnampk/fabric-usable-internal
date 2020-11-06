@@ -15,6 +15,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
 	pcommon "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/bccsp"
@@ -23,7 +24,6 @@ import (
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/core/config"
 	"github.com/hyperledger/fabric/core/scc/cscc"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
 	"github.com/hyperledger/fabric/msp"
 	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
 	"github.com/hyperledger/fabric/protoutil"

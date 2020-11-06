@@ -14,6 +14,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/Hnampk/fabric-usable-internal/peer/gossip/mocks"
+	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/common"
 	pmsp "github.com/hyperledger/fabric-protos-go/msp"
@@ -22,8 +24,6 @@ import (
 	"github.com/hyperledger/fabric/common/policies"
 	"github.com/hyperledger/fabric/common/util"
 	"github.com/hyperledger/fabric/gossip/api"
-	"github.com/hyperledger/fabric/internal/peer/gossip/mocks"
-	"github.com/hyperledger/fabric/internal/pkg/identity"
 	"github.com/hyperledger/fabric/msp"
 	"github.com/hyperledger/fabric/msp/mgmt"
 	"github.com/hyperledger/fabric/protoutil"
