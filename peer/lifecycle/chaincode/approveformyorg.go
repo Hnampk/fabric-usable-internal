@@ -9,6 +9,7 @@ package chaincode
 import (
 	"context"
 	"crypto/tls"
+	"fmt"
 	"time"
 
 	"github.com/golang/protobuf/proto"
@@ -82,8 +83,8 @@ func (a *ApproveForMyOrgInput) Validate() error {
 func ApproveForMyOrgCmd(a *ApproverForMyOrg, cryptoProvider bccsp.BCCSP) *cobra.Command {
 	chaincodeApproveForMyOrgCmd := &cobra.Command{
 		Use:   "approveformyorg",
-		Short: "Approve the chaincode definition for my org.",
-		Long:  "Approve the chaincode definition for my organization.",
+		Short: fmt.Sprintf("Approve the chaincode definition for my org."),
+		Long:  fmt.Sprintf("Approve the chaincode definition for my organization."),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if a == nil {
 				// set input from CLI flags

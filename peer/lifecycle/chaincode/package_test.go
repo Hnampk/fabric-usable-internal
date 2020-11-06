@@ -170,12 +170,12 @@ var _ = Describe("Package", func() {
 	})
 
 	Describe("PackageCmd", func() {
-		var packageCmd *cobra.Command
+		var (
+			packageCmd *cobra.Command
+		)
 
 		BeforeEach(func() {
 			packageCmd = chaincode.PackageCmd(nil)
-			packageCmd.SilenceErrors = true
-			packageCmd.SilenceUsage = true
 			packageCmd.SetArgs([]string{
 				"testPackage",
 				"--path=testPath",
@@ -191,6 +191,7 @@ var _ = Describe("Package", func() {
 
 		Context("when more than one argument is provided", func() {
 			BeforeEach(func() {
+				packageCmd = chaincode.PackageCmd(nil)
 				packageCmd.SetArgs([]string{
 					"testPackage",
 					"whatthe",
@@ -205,6 +206,7 @@ var _ = Describe("Package", func() {
 
 		Context("when no argument is provided", func() {
 			BeforeEach(func() {
+				packageCmd = chaincode.PackageCmd(nil)
 				packageCmd.SetArgs([]string{})
 			})
 

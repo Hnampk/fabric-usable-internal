@@ -101,6 +101,7 @@ import (
 )
 
 const (
+	chaincodeAddrKey       = "peer.chaincodeAddress"
 	chaincodeListenAddrKey = "peer.chaincodeListenAddress"
 	defaultChaincodePort   = 7052
 )
@@ -315,8 +316,7 @@ func serve(args []string) error {
 		signingIdentityBytes,
 		expirationLogger.Warnf, // This can be used to piggyback a metric event in the future
 		time.Now(),
-		time.AfterFunc,
-	)
+		time.AfterFunc)
 
 	policyMgr := policies.PolicyManagerGetterFunc(peerInstance.GetPolicyManager)
 
@@ -411,13 +411,7 @@ func serve(args []string) error {
 		DurablePath: externalBuilderOutput,
 	}
 
-	lifecycleCache := lifecycle.NewCache(
-		lifecycleResources,
-		mspID,
-		metadataManager,
-		chaincodeCustodian,
-		ebMetadataProvider,
-	)
+	lifecycleCache := lifecycle.NewCache(lifecycleResources, mspID, metadataManager, chaincodeCustodian, ebMetadataProvider)
 
 	txProcessors := map[common.HeaderType]ledger.CustomTxProcessor{
 		common.HeaderType_CONFIG: &peer.ConfigTxProcessor{},
@@ -433,7 +427,7 @@ func serve(args []string) error {
 			HealthCheckRegistry:             opsSystem,
 			StateListeners:                  []ledger.StateListener{lifecycleCache},
 			Config:                          ledgerConfig(),
-			HashProvider:                    factory.GetDefault(),
+			Hasher:                          factory.GetDefault(),
 			EbMetadataProvider:              ebMetadataProvider,
 		},
 	)
@@ -745,7 +739,7 @@ func serve(args []string) error {
 
 	// deploy system chaincodes
 	for _, cc := range []scc.SelfDescribingSysCC{lsccInst, csccInst, qsccInst, lifecycleSCC} {
-		if enabled, ok := chaincodeConfig.SCCAllowlist[cc.Name()]; !ok || !enabled {
+		if enabled, ok := chaincodeConfig.SCCWhitelist[cc.Name()]; !ok || !enabled {
 			logger.Infof("not deploying chaincode %s as it is not enabled", cc.Name())
 			continue
 		}
@@ -835,8 +829,8 @@ func serve(args []string) error {
 	}
 
 	handleSignals(addPlatformSignals(map[os.Signal]func(){
-		syscall.SIGINT:  func() { containerRouter.Shutdown(5 * time.Second); serve <- nil },
-		syscall.SIGTERM: func() { containerRouter.Shutdown(5 * time.Second); serve <- nil },
+		syscall.SIGINT:  func() { serve <- nil },
+		syscall.SIGTERM: func() { serve <- nil },
 	}))
 
 	logger.Infof("Started peer with ID=[%s], network ID=[%s], address=[%s]", coreConfig.PeerID, coreConfig.NetworkID, coreConfig.PeerAddress)
@@ -1300,74 +1294,74 @@ func resetLoop(
 	pLedger getLedger,
 	interval time.Duration,
 ) {
-	ledgerDataPath := filepath.Join(coreconfig.GetPath("peer.fileSystemPath"), "ledgersData")
-
 	// periodically check to see if current ledger height(s) surpass prereset height(s)
 	ticker := time.NewTicker(interval)
+
 	defer ticker.Stop()
-
-	for range ticker.C {
-		logger.Info("Ledger rebuild: Checking if current ledger heights surpass prereset ledger heights")
-		logger.Debugf("Ledger rebuild: Number of ledgers still rebuilding before check: %d", len(preResetHeights))
-
-		for cid, height := range preResetHeights {
-			l := pLedger(cid)
-			if l == nil {
-				logger.Warningf("No ledger found for channel [%s]", cid)
-				continue
+	for {
+		select {
+		case <-ticker.C:
+			logger.Info("Ledger rebuild: Checking if current ledger heights surpass prereset ledger heights")
+			logger.Debugf("Ledger rebuild: Number of ledgers still rebuilding before check: %d", len(preResetHeights))
+			for cid, height := range preResetHeights {
+				var l peerLedger
+				l = pLedger(cid)
+				if l == nil {
+					logger.Warningf("No ledger found for channel [%s]", cid)
+					continue
+				}
+				bcInfo, err := l.GetBlockchainInfo()
+				if bcInfo != nil {
+					logger.Debugf("Ledger rebuild: channel [%s]: currentHeight [%d] : preresetHeight [%d]", cid, bcInfo.GetHeight(), height)
+					if bcInfo.GetHeight() >= height {
+						delete(preResetHeights, cid)
+					} else {
+						break
+					}
+				} else {
+					if err != nil {
+						logger.Warningf("Ledger rebuild: could not retrieve info for channel [%s]: %s", cid, err.Error())
+					}
+				}
 			}
 
-			bcInfo, err := l.GetBlockchainInfo()
-			if err != nil {
-				logger.Warningf("Ledger rebuild: could not retrieve info for channel [%s]: %s", cid, err.Error())
-				continue
+			logger.Debugf("Ledger rebuild: Number of ledgers still rebuilding after check: %d", len(preResetHeights))
+			if len(preResetHeights) == 0 {
+				logger.Infof("Ledger rebuild: Complete, all ledgers surpass prereset heights. Endorsement request processing will be enabled.")
+				rootFSPath := filepath.Join(coreconfig.GetPath("peer.fileSystemPath"), "ledgersData")
+				err := kvledger.ClearPreResetHeight(rootFSPath, ledgerIDs)
+				if err != nil {
+					logger.Warningf("Ledger rebuild: could not clear off prerest files: error=%s", err)
+				}
+				resetFilter.setReject(false)
+				return
 			}
-			if bcInfo == nil {
-				continue
-			}
-
-			logger.Debugf("Ledger rebuild: channel [%s]: currentHeight [%d] : preresetHeight [%d]", cid, bcInfo.GetHeight(), height)
-			if bcInfo.GetHeight() >= height {
-				delete(preResetHeights, cid)
-			}
-		}
-
-		logger.Debugf("Ledger rebuild: Number of ledgers still rebuilding after check: %d", len(preResetHeights))
-		if len(preResetHeights) == 0 {
-			logger.Infof("Ledger rebuild: Complete, all ledgers surpass prereset heights. Endorsement request processing will be enabled.")
-
-			err := kvledger.ClearPreResetHeight(ledgerDataPath, ledgerIDs)
-			if err != nil {
-				logger.Warningf("Ledger rebuild: could not clear off prerest files: error=%s", err)
-			}
-			resetFilter.setReject(false)
-			return
 		}
 	}
 }
 
-// reset implements the auth.Filter interface.
+//implements the auth.Filter interface
 type reset struct {
-	lock   sync.RWMutex
+	sync.RWMutex
 	next   pb.EndorserServer
 	reject bool
 }
 
 func (r *reset) setReject(reject bool) {
-	r.lock.Lock()
-	defer r.lock.Unlock()
+	r.Lock()
+	defer r.Unlock()
 	r.reject = reject
 }
 
-// Init initializes Reset with the next EndorserServer.
+// Init initializes Reset with the next EndorserServer
 func (r *reset) Init(next pb.EndorserServer) {
 	r.next = next
 }
 
-// ProcessProposal processes a signed proposal.
+// ProcessProposal processes a signed proposal
 func (r *reset) ProcessProposal(ctx context.Context, signedProp *pb.SignedProposal) (*pb.ProposalResponse, error) {
-	r.lock.RLock()
-	defer r.lock.RUnlock()
+	r.RLock()
+	defer r.RUnlock()
 	if r.reject {
 		return nil, errors.New("endorse requests are blocked while ledgers are being rebuilt")
 	}

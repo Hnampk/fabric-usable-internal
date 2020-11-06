@@ -11,6 +11,7 @@ import (
 
 	coreconfig "github.com/hyperledger/fabric/core/config"
 	"github.com/hyperledger/fabric/core/ledger"
+	"github.com/hyperledger/fabric/core/ledger/util/couchdb"
 	"github.com/spf13/viper"
 )
 
@@ -42,15 +43,11 @@ func ledgerConfig() *ledger.Config {
 	}
 
 	rootFSPath := filepath.Join(coreconfig.GetPath("peer.fileSystemPath"), "ledgersData")
-	snapshotsRootDir := viper.GetString("ledger.snapshots.rootDir")
-	if snapshotsRootDir == "" {
-		snapshotsRootDir = filepath.Join(rootFSPath, "snapshots")
-	}
 	conf := &ledger.Config{
 		RootFSPath: rootFSPath,
 		StateDBConfig: &ledger.StateDBConfig{
 			StateDatabase: viper.GetString("ledger.state.stateDatabase"),
-			CouchDB:       &ledger.CouchDBConfig{},
+			CouchDB:       &couchdb.Config{},
 		},
 		PrivateDataConfig: &ledger.PrivateDataConfig{
 			MaxBatchSize:    collElgProcMaxDbBatchSize,
@@ -60,13 +57,10 @@ func ledgerConfig() *ledger.Config {
 		HistoryDBConfig: &ledger.HistoryDBConfig{
 			Enabled: viper.GetBool("ledger.history.enableHistoryDatabase"),
 		},
-		SnapshotsConfig: &ledger.SnapshotsConfig{
-			RootDir: snapshotsRootDir,
-		},
 	}
 
 	if conf.StateDBConfig.StateDatabase == "CouchDB" {
-		conf.StateDBConfig.CouchDB = &ledger.CouchDBConfig{
+		conf.StateDBConfig.CouchDB = &couchdb.Config{
 			Address:                 viper.GetString("ledger.state.couchDBConfig.couchDBAddress"),
 			Username:                viper.GetString("ledger.state.couchDBConfig.username"),
 			Password:                viper.GetString("ledger.state.couchDBConfig.password"),

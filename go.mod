@@ -11,7 +11,8 @@ require (
 	github.com/gorilla/mux v1.8.0
 	github.com/grpc-ecosystem/go-grpc-middleware v1.2.2
 	github.com/hashicorp/go-version v1.2.1 // indirect
-	github.com/hyperledger/fabric v2.2.0+incompatible
+	github.com/hyperledger/fabric v2.1.1+incompatible
+	// github.com/hyperledger/fabric v2.2.0+incompatible // indirect
 	github.com/hyperledger/fabric-amcl v0.0.0-20200424173818-327c9e2cf77a // indirect
 	github.com/hyperledger/fabric-chaincode-go v0.0.0-20200728190242-9b3ae92d8664
 	github.com/hyperledger/fabric-config v0.0.9

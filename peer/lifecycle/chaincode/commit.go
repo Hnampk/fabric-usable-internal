@@ -9,6 +9,7 @@ package chaincode
 import (
 	"context"
 	"crypto/tls"
+	"fmt"
 	"time"
 
 	"github.com/golang/protobuf/proto"
@@ -82,8 +83,8 @@ func (c *CommitInput) Validate() error {
 func CommitCmd(c *Committer, cryptoProvider bccsp.BCCSP) *cobra.Command {
 	chaincodeCommitCmd := &cobra.Command{
 		Use:   "commit",
-		Short: "Commit the chaincode definition on the channel.",
-		Long:  "Commit the chaincode definition on the channel.",
+		Short: fmt.Sprintf("Commit the chaincode definition on the channel."),
+		Long:  fmt.Sprintf("Commit the chaincode definition on the channel."),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if c == nil {
 				// set input from CLI flags

@@ -22,7 +22,7 @@ import (
 
 // AddPemToCertPool adds PEM-encoded certs to a cert pool
 func AddPemToCertPool(pemCerts []byte, pool *x509.CertPool) error {
-	certs, err := pemToX509Certs(pemCerts)
+	certs, _, err := pemToX509Certs(pemCerts)
 	if err != nil {
 		return err
 	}
@@ -33,8 +33,9 @@ func AddPemToCertPool(pemCerts []byte, pool *x509.CertPool) error {
 }
 
 // parse PEM-encoded certs
-func pemToX509Certs(pemCerts []byte) ([]*x509.Certificate, error) {
+func pemToX509Certs(pemCerts []byte) ([]*x509.Certificate, []string, error) {
 	var certs []*x509.Certificate
+	var subjects []string
 
 	// it's possible that multiple certs are encoded
 	for len(pemCerts) > 0 {
@@ -46,13 +47,14 @@ func pemToX509Certs(pemCerts []byte) ([]*x509.Certificate, error) {
 
 		cert, err := x509.ParseCertificate(block.Bytes)
 		if err != nil {
-			return nil, err
+			return nil, []string{}, err
 		}
 
 		certs = append(certs, cert)
+		subjects = append(subjects, string(cert.RawSubject))
 	}
 
-	return certs, nil
+	return certs, subjects, nil
 }
 
 // BindingInspector receives as parameters a gRPC context and an Envelope,
