@@ -13,14 +13,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Hnampk/fabric-usable-internal/peer/chaincode/mock"
-	"github.com/Hnampk/fabric-usable-internal/peer/common"
-
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/bccsp"
 	"github.com/hyperledger/fabric/bccsp/sw"
 	"github.com/hyperledger/fabric/common/flogging/floggingtest"
+	"github.com/hyperledger/fabric/internal/peer/chaincode/mock"
+	"github.com/hyperledger/fabric/internal/peer/common"
 	"github.com/hyperledger/fabric/msp"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/spf13/viper"

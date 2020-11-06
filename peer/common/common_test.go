@@ -15,11 +15,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Hnampk/fabric-usable-internal/peer/common"
-
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/common/util"
 	"github.com/hyperledger/fabric/core/config/configtest"
+	"github.com/hyperledger/fabric/internal/peer/common"
 	"github.com/hyperledger/fabric/msp"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

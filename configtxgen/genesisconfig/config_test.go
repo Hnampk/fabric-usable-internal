@@ -11,9 +11,9 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
-	"github.com/hyperledger/fabric/common/viperutil"
 	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/stretchr/testify/require"
+	"github.com/spf13/viper"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestLoadProfile(t *testing.T) {
@@ -30,7 +30,7 @@ func TestLoadProfile(t *testing.T) {
 	for _, pName := range pNames {
 		t.Run(pName, func(t *testing.T) {
 			p := Load(pName)
-			require.NotNil(t, p, "profile should not be nil")
+			assert.NotNil(t, p, "profile should not be nil")
 		})
 	}
 }
@@ -48,7 +48,7 @@ func TestLoadProfileWithPath(t *testing.T) {
 	for _, pName := range pNames {
 		t.Run(pName, func(t *testing.T) {
 			p := Load(pName, devConfigDir)
-			require.NotNil(t, p, "profile should not be nil")
+			assert.NotNil(t, p, "profile should not be nil")
 		})
 	}
 }
@@ -58,22 +58,22 @@ func TestLoadTopLevel(t *testing.T) {
 	defer cleanup()
 
 	topLevel := LoadTopLevel()
-	require.NotNil(t, topLevel.Application, "application should not be nil")
-	require.NotNil(t, topLevel.Capabilities, "capabilities should not be nil")
-	require.NotNil(t, topLevel.Orderer, "orderer should not be nil")
-	require.NotNil(t, topLevel.Organizations, "organizations should not be nil")
-	require.NotNil(t, topLevel.Profiles, "profiles should not be nil")
+	assert.NotNil(t, topLevel.Application, "application should not be nil")
+	assert.NotNil(t, topLevel.Capabilities, "capabilities should not be nil")
+	assert.NotNil(t, topLevel.Orderer, "orderer should not be nil")
+	assert.NotNil(t, topLevel.Organizations, "organizations should not be nil")
+	assert.NotNil(t, topLevel.Profiles, "profiles should not be nil")
 }
 
 func TestLoadTopLevelWithPath(t *testing.T) {
 	devConfigDir := configtest.GetDevConfigDir()
 
 	topLevel := LoadTopLevel(devConfigDir)
-	require.NotNil(t, topLevel.Application, "application should not be nil")
-	require.NotNil(t, topLevel.Capabilities, "capabilities should not be nil")
-	require.NotNil(t, topLevel.Orderer, "orderer should not be nil")
-	require.NotNil(t, topLevel.Organizations, "organizations should not be nil")
-	require.NotNil(t, topLevel.Profiles, "profiles should not be nil")
+	assert.NotNil(t, topLevel.Application, "application should not be nil")
+	assert.NotNil(t, topLevel.Capabilities, "capabilities should not be nil")
+	assert.NotNil(t, topLevel.Orderer, "orderer should not be nil")
+	assert.NotNil(t, topLevel.Organizations, "organizations should not be nil")
+	assert.NotNil(t, topLevel.Profiles, "profiles should not be nil")
 }
 
 func TestConsensusSpecificInit(t *testing.T) {
@@ -90,7 +90,7 @@ func TestConsensusSpecificInit(t *testing.T) {
 		}
 		profile.completeInitialization(devConfigDir)
 
-		require.Equal(t, profile.Orderer.OrdererType, genesisDefaults.Orderer.OrdererType)
+		assert.Equal(t, profile.Orderer.OrdererType, genesisDefaults.Orderer.OrdererType)
 	})
 
 	t.Run("unknown orderer type", func(t *testing.T) {
@@ -100,7 +100,7 @@ func TestConsensusSpecificInit(t *testing.T) {
 			},
 		}
 
-		require.Panics(t, func() {
+		assert.Panics(t, func() {
 			profile.completeInitialization(devConfigDir)
 		})
 	})
@@ -112,7 +112,7 @@ func TestConsensusSpecificInit(t *testing.T) {
 			},
 		}
 		profile.completeInitialization(devConfigDir)
-		require.Nil(t, profile.Orderer.Kafka.Brokers, "Kafka config settings should not be set")
+		assert.Nil(t, profile.Orderer.Kafka.Brokers, "Kafka config settings should not be set")
 	})
 
 	t.Run("kafka", func(t *testing.T) {
@@ -122,7 +122,7 @@ func TestConsensusSpecificInit(t *testing.T) {
 			},
 		}
 		profile.completeInitialization(devConfigDir)
-		require.NotNil(t, profile.Orderer.Kafka.Brokers, "Kafka config settings should be set")
+		assert.NotNil(t, profile.Orderer.Kafka.Brokers, "Kafka config settings should be set")
 	})
 
 	t.Run("raft", func(t *testing.T) {
@@ -144,7 +144,7 @@ func TestConsensusSpecificInit(t *testing.T) {
 				},
 			}
 
-			require.Panics(t, func() {
+			assert.Panics(t, func() {
 				profile.completeInitialization(devConfigDir)
 			})
 		})
@@ -152,7 +152,7 @@ func TestConsensusSpecificInit(t *testing.T) {
 		t.Run("nil consenter set", func(t *testing.T) { // should panic
 			profile := makeProfile(nil, nil)
 
-			require.Panics(t, func() {
+			assert.Panics(t, func() {
 				profile.completeInitialization(devConfigDir)
 			})
 		})
@@ -194,7 +194,7 @@ func TestConsensusSpecificInit(t *testing.T) {
 				for _, consenter := range failingConsenterSpecifications {
 					profile := makeProfile([]*etcdraft.Consenter{consenter}, nil)
 
-					require.Panics(t, func() {
+					assert.Panics(t, func() {
 						profile.completeInitialization(devConfigDir)
 					})
 				}
@@ -205,12 +205,12 @@ func TestConsensusSpecificInit(t *testing.T) {
 				profile.completeInitialization(devConfigDir)
 
 				// need not be tested in subsequent tests
-				require.NotNil(t, profile.Orderer.EtcdRaft, "EtcdRaft config settings should be set")
-				require.Equal(t, profile.Orderer.EtcdRaft.Consenters[0].ClientTlsCert, consenters[0].ClientTlsCert,
+				assert.NotNil(t, profile.Orderer.EtcdRaft, "EtcdRaft config settings should be set")
+				assert.Equal(t, profile.Orderer.EtcdRaft.Consenters[0].ClientTlsCert, consenters[0].ClientTlsCert,
 					"Client TLS cert path should be correctly set")
 
 				// specific assertion for this test context
-				require.Equal(t, profile.Orderer.EtcdRaft.Options, genesisDefaults.Orderer.EtcdRaft.Options,
+				assert.Equal(t, profile.Orderer.EtcdRaft.Options, genesisDefaults.Orderer.EtcdRaft.Options,
 					"Options should be set to the default value")
 			})
 
@@ -223,9 +223,9 @@ func TestConsensusSpecificInit(t *testing.T) {
 				profile.completeInitialization(devConfigDir)
 
 				// specific assertions for this test context
-				require.Equal(t, profile.Orderer.EtcdRaft.Options.HeartbeatTick, heartbeatTick,
+				assert.Equal(t, profile.Orderer.EtcdRaft.Options.HeartbeatTick, heartbeatTick,
 					"HeartbeatTick should be set to the specified value")
-				require.Equal(t, profile.Orderer.EtcdRaft.Options.ElectionTick, genesisDefaults.Orderer.EtcdRaft.Options.ElectionTick,
+				assert.Equal(t, profile.Orderer.EtcdRaft.Options.ElectionTick, genesisDefaults.Orderer.EtcdRaft.Options.ElectionTick,
 					"ElectionTick should be set to the default value")
 			})
 
@@ -238,9 +238,9 @@ func TestConsensusSpecificInit(t *testing.T) {
 				profile.completeInitialization(devConfigDir)
 
 				// specific assertions for this test context
-				require.Equal(t, profile.Orderer.EtcdRaft.Options.ElectionTick, electionTick,
+				assert.Equal(t, profile.Orderer.EtcdRaft.Options.ElectionTick, electionTick,
 					"ElectionTick should be set to the specified value")
-				require.Equal(t, profile.Orderer.EtcdRaft.Options.HeartbeatTick, genesisDefaults.Orderer.EtcdRaft.Options.HeartbeatTick,
+				assert.Equal(t, profile.Orderer.EtcdRaft.Options.HeartbeatTick, genesisDefaults.Orderer.EtcdRaft.Options.HeartbeatTick,
 					"HeartbeatTick should be set to the default value")
 			})
 
@@ -251,7 +251,7 @@ func TestConsensusSpecificInit(t *testing.T) {
 				}
 				profile := makeProfile(consenters, options)
 
-				require.Panics(t, func() {
+				assert.Panics(t, func() {
 					profile.completeInitialization(devConfigDir)
 				})
 			})
@@ -262,7 +262,7 @@ func TestConsensusSpecificInit(t *testing.T) {
 				}
 				profile := makeProfile(consenters, options)
 
-				require.Panics(t, func() {
+				assert.Panics(t, func() {
 					profile.completeInitialization(devConfigDir)
 				})
 			})
@@ -274,31 +274,31 @@ func TestLoadConfigCache(t *testing.T) {
 	cleanup := configtest.SetDevFabricConfigPath(t)
 	defer cleanup()
 
-	cfg := viperutil.New()
+	v := viper.New()
 	devConfigDir := configtest.GetDevConfigDir()
-	cfg.AddConfigPaths(devConfigDir)
-	cfg.SetConfigName("configtx")
-	err := cfg.ReadInConfig()
-	require.NoError(t, err)
+	v.AddConfigPath(devConfigDir)
+	v.SetConfigName("configtx")
+	err := v.ReadInConfig()
+	assert.NoError(t, err)
 
-	configPath := cfg.ConfigFileUsed()
+	configPath := v.ConfigFileUsed()
 	c := &configCache{
 		cache: make(map[string][]byte),
 	}
 
 	// Load the initial config, update the environment, and load again.
 	// With the caching behavior, the update should not be reflected.
-	initial, err := c.load(cfg, configPath)
-	require.NoError(t, err)
+	initial, err := c.load(v, configPath)
+	assert.NoError(t, err)
 	os.Setenv("ORDERER_KAFKA_RETRY_SHORTINTERVAL", "120s")
-	updated, err := c.load(cfg, configPath)
-	require.NoError(t, err)
-	require.Equal(t, initial, updated, "expected %#v to equal %#v", updated, initial)
+	updated, err := c.load(v, configPath)
+	assert.NoError(t, err)
+	assert.Equal(t, initial, updated, "expected %#v to equal %#v", updated, initial)
 
 	// Change the configuration we got back and load again.
 	// The  new value should not contain the updated to the initial
 	initial.Orderer.OrdererType = "bad-Orderer-Type"
-	updated, err = c.load(cfg, configPath)
-	require.NoError(t, err)
-	require.NotEqual(t, initial, updated, "expected %#v to not equal %#v", updated, initial)
+	updated, err = c.load(v, configPath)
+	assert.NoError(t, err)
+	assert.NotEqual(t, initial, updated, "expected %#v to not equal %#v", updated, initial)
 }

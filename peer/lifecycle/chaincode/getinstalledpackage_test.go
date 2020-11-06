@@ -12,11 +12,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/Hnampk/fabric-usable-internal/peer/lifecycle/chaincode"
-	"github.com/Hnampk/fabric-usable-internal/peer/lifecycle/chaincode/mock"
-
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/bccsp/sw"
+	"github.com/hyperledger/fabric/internal/peer/lifecycle/chaincode"
+	"github.com/hyperledger/fabric/internal/peer/lifecycle/chaincode/mock"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 

@@ -20,10 +20,6 @@ import (
 	"syscall"
 	"time"
 
-	peergossip "github.com/Hnampk/fabric-usable-internal/peer/gossip"
-	"github.com/Hnampk/fabric-usable-internal/peer/version"
-	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
-
 	docker "github.com/fsouza/go-dockerclient"
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/common"
@@ -92,6 +88,9 @@ import (
 	gossipprivdata "github.com/hyperledger/fabric/gossip/privdata"
 	"github.com/hyperledger/fabric/gossip/service"
 	gossipservice "github.com/hyperledger/fabric/gossip/service"
+	peergossip "github.com/hyperledger/fabric/internal/peer/gossip"
+	"github.com/hyperledger/fabric/internal/peer/version"
+	"github.com/hyperledger/fabric/internal/pkg/comm"
 	"github.com/hyperledger/fabric/msp"
 	"github.com/hyperledger/fabric/msp/mgmt"
 	"github.com/hyperledger/fabric/protoutil"

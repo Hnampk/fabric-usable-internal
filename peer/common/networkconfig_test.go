@@ -9,8 +9,7 @@ package common_test
 import (
 	"testing"
 
-	"github.com/Hnampk/fabric-usable-internal/peer/common"
-
+	"github.com/hyperledger/fabric/internal/peer/common"
 	"github.com/stretchr/testify/assert"
 )
 

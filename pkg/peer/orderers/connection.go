@@ -13,9 +13,8 @@ import (
 	"math/rand"
 	"sync"
 
-	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
-
 	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/hyperledger/fabric/internal/pkg/comm"
 
 	"github.com/pkg/errors"
 )

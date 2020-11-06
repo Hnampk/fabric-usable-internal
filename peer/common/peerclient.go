@@ -12,10 +12,9 @@ import (
 	"io/ioutil"
 	"time"
 
-	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
-
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/core/config"
+	"github.com/hyperledger/fabric/internal/pkg/comm"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 )
@@ -32,7 +31,7 @@ func NewPeerClientFromEnv() (*PeerClient, error) {
 	if err != nil {
 		return nil, errors.WithMessage(err, "failed to load config for PeerClient")
 	}
-	return NewPeerClientForClientConfig(address, override, clientConfig)
+	return newPeerClientForClientConfig(address, override, clientConfig)
 }
 
 // NewPeerClientForAddress creates an instance of a PeerClient using the
@@ -78,10 +77,10 @@ func NewPeerClientForAddress(address, tlsRootCertFile string) (*PeerClient, erro
 		}
 		clientConfig.SecOpts.ServerRootCAs = [][]byte{caPEM}
 	}
-	return NewPeerClientForClientConfig(address, override, clientConfig)
+	return newPeerClientForClientConfig(address, override, clientConfig)
 }
 
-func NewPeerClientForClientConfig(address, override string, clientConfig comm.ClientConfig) (*PeerClient, error) {
+func newPeerClientForClientConfig(address, override string, clientConfig comm.ClientConfig) (*PeerClient, error) {
 	// set the default keepalive options to match the server
 	clientConfig.KaOpts = comm.DefaultKeepaliveOptions
 	gClient, err := comm.NewGRPCClient(clientConfig)

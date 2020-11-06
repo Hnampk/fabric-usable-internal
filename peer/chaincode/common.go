@@ -16,9 +16,6 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Hnampk/fabric-usable-internal/peer/common"
-	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
-
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-chaincode-go/shim"
 	pcommon "github.com/hyperledger/fabric-protos-go/common"
@@ -27,6 +24,8 @@ import (
 	"github.com/hyperledger/fabric/bccsp"
 	"github.com/hyperledger/fabric/common/policydsl"
 	"github.com/hyperledger/fabric/common/util"
+	"github.com/hyperledger/fabric/internal/peer/common"
+	"github.com/hyperledger/fabric/internal/pkg/identity"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
@@ -822,76 +821,6 @@ func (dg *DeliverGroup) ClientWait(dc *DeliverClient) {
 			err = errors.Errorf("received unexpected response type (%T) from %s", r, dc.Address)
 			dg.setError(err)
 			return
-		}
-	}
-}
-
-// Listen clones Wait method
-// Listen waits for all deliver client connections in the group to
-// either receive a block with the txid, an error, or for the
-// context to timeout
-func (dg *DeliverGroup) Listen(ctx context.Context, txIdChannel chan *pb.FilteredTransaction) error {
-	if len(dg.Clients) == 0 {
-		return nil
-	}
-	dg.wg.Add(len(dg.Clients))
-	errChan := make(chan string)
-	for _, client := range dg.Clients {
-		go dg.ClientListen(client, txIdChannel, errChan)
-	}
-	readyCh := make(chan struct{})
-	go dg.WaitForWG(readyCh)
-
-	select {
-	case <-readyCh:
-		if dg.Error != nil {
-			return dg.Error
-		}
-	case <-ctx.Done():
-		err := errors.New("timed out waiting for txid on all peers")
-		return err
-	case <-errChan:
-		err := errors.New("timed out waiting for txid on all peers")
-		return err
-	}
-
-	return nil
-}
-
-// ClientListen clones ClientWait method
-// ClientListen waits for the specified deliver client to receive
-// a block event, and dont care about the txid
-func (dg *DeliverGroup) ClientListen(dc *DeliverClient, txIdChannel chan *pb.FilteredTransaction, errChan chan string) {
-	defer dg.wg.Done()
-	for {
-		resp, err := dc.Connection.Recv()
-		if err != nil {
-			err = errors.WithMessagef(err, "error receiving from deliver filtered at %s", dc.Address)
-			fmt.Println(err)
-			dg.setError(err)
-			errChan <- err.Error()
-			return
-		}
-		switch r := resp.Type.(type) {
-		case *pb.DeliverResponse_FilteredBlock:
-			filteredTransactions := r.FilteredBlock.FilteredTransactions
-			for _, tx := range filteredTransactions {
-				// if tx.TxValidationCode != pb.TxValidationCode_VALID {
-				// 	err = errors.Errorf("transaction invalidated with status (%s)", tx.TxValidationCode)
-				// 	dg.setError(err)
-				// }
-				txIdChannel <- tx
-			}
-		case *pb.DeliverResponse_Status:
-			err = errors.Errorf("deliver completed with status (%s) before txid received", r.Status)
-			fmt.Println(err)
-			dg.setError(err)
-			continue
-		default:
-			err = errors.Errorf("received unexpected response type (%T) from %s", r, dc.Address)
-			fmt.Println(err)
-			dg.setError(err)
-			continue
 		}
 	}
 }

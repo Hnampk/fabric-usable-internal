@@ -16,11 +16,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Hnampk/fabric-usable-internal/pkg/comm"
-	"github.com/Hnampk/fabric-usable-internal/pkg/comm/testpb"
-
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/common"
+	"github.com/hyperledger/fabric/internal/pkg/comm"
+	"github.com/hyperledger/fabric/internal/pkg/comm/testpb"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"

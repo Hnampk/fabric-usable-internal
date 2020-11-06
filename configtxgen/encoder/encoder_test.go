@@ -12,15 +12,15 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	"github.com/Hnampk/fabric-usable-internal/configtxgen/encoder"
-	"github.com/Hnampk/fabric-usable-internal/configtxgen/encoder/fakes"
-	"github.com/Hnampk/fabric-usable-internal/configtxgen/genesisconfig"
-	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
 	"github.com/golang/protobuf/proto"
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
 	"github.com/hyperledger/fabric/common/util"
+	"github.com/hyperledger/fabric/internal/configtxgen/encoder"
+	"github.com/hyperledger/fabric/internal/configtxgen/encoder/fakes"
+	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
+	"github.com/hyperledger/fabric/internal/pkg/identity"
 	"github.com/hyperledger/fabric/protoutil"
 )
 

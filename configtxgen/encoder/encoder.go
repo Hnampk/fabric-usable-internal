@@ -7,9 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 package encoder
 
 import (
-	"github.com/Hnampk/fabric-usable-internal/configtxgen/genesisconfig"
-	"github.com/Hnampk/fabric-usable-internal/configtxlator/update"
-	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
 	"github.com/golang/protobuf/proto"
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
@@ -19,6 +16,9 @@ import (
 	"github.com/hyperledger/fabric/common/policies"
 	"github.com/hyperledger/fabric/common/policydsl"
 	"github.com/hyperledger/fabric/common/util"
+	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
+	"github.com/hyperledger/fabric/internal/configtxlator/update"
+	"github.com/hyperledger/fabric/internal/pkg/identity"
 	"github.com/hyperledger/fabric/msp"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/pkg/errors"

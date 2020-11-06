@@ -10,12 +10,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Hnampk/fabric-usable-internal/peer/packaging"
-
-	"github.com/Hnampk/fabric-usable-internal/peer/common"
-
 	"github.com/hyperledger/fabric/bccsp"
 	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/hyperledger/fabric/internal/peer/common"
+	"github.com/hyperledger/fabric/internal/peer/packaging"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )

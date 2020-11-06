@@ -17,23 +17,18 @@ import (
 	"testing"
 	"time"
 
-	signerLib "github.com/hyperledger/fabric/cmd/common/signer"
-	"google.golang.org/grpc"
-
-	"github.com/Hnampk/fabric-usable-internal/configtxgen/encoder"
-	"github.com/Hnampk/fabric-usable-internal/configtxgen/genesisconfig"
-	"github.com/Hnampk/fabric-usable-internal/peer/chaincode/mock"
-	"github.com/Hnampk/fabric-usable-internal/peer/common"
-	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
-
 	"github.com/golang/protobuf/proto"
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	pcommon "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/bccsp/factory"
 	"github.com/hyperledger/fabric/bccsp/sw"
 	"github.com/hyperledger/fabric/common/policydsl"
 	"github.com/hyperledger/fabric/core/config/configtest"
+	"github.com/hyperledger/fabric/internal/configtxgen/encoder"
+	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
+	"github.com/hyperledger/fabric/internal/peer/chaincode/mock"
+	"github.com/hyperledger/fabric/internal/peer/common"
+	"github.com/hyperledger/fabric/internal/pkg/identity"
 	"github.com/hyperledger/fabric/protoutil"
 	. "github.com/onsi/gomega"
 	"github.com/spf13/cobra"
@@ -861,7 +856,6 @@ func TestProcessProposals(t *testing.T) {
 			Endorsement: &pb.Endorsement{},
 		}
 		mockClients = append(mockClients, common.GetMockEndorserClient(response, nil))
-		t.Log("", response, mockClients)
 	}
 	mockErrorClient := common.GetMockEndorserClient(nil, errors.New("failed to call endorser"))
 	signedProposal := &pb.SignedProposal{}
@@ -892,84 +886,5 @@ func TestProcessProposals(t *testing.T) {
 		responses, err := processProposals([]pb.EndorserClient{mockClients[0], mockErrorClient, mockClients[1]}, signedProposal)
 		assert.EqualError(t, err, "failed to call endorser")
 		assert.Nil(t, responses)
-	})
-}
-
-func TestProcessProposalsHello(t *testing.T) {
-	t.Log("TestProcessProposalsHello")
-	signerConfig := signerLib.Config{
-		MSPID:        "Org1MSP",
-		IdentityPath: "/home/nampkh/nampkh/my-fabric/network/peer/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem",
-		KeyPath:      "/home/nampkh/nampkh/my-fabric/network/peer/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/priv_sk",
-		// IdentityPath: "/home/nampkh/nampkh/my-fabric/vnpay.vn/hfc-store/admin@Org1MSP-cert.pem",
-		// KeyPath:      "/home/nampkh/nampkh/my-fabric/vnpay.vn/hfc-msp/keystore/admin_org1_priv_sk",
-	}
-
-	chaincodeLang = "GOLANG"
-	chaincodePath = "/home/nampkh/nampkh/my-fabric/chaincode/high-throughput"
-	chaincodeName = "mycc"
-	chaincodeVersion = "1.0"
-
-	signer, err := signerLib.NewSigner(signerConfig)
-
-	if err != nil {
-		t.Error(err)
-	}
-
-	// signer, err := common.GetDefaultSignerFnc()
-	chaincodeCtorJSON := `{"args":["update","var","100","+"]}`
-
-	input := chaincodeInput{}
-	if err := json.Unmarshal([]byte(chaincodeCtorJSON), &input); err != nil {
-		t.Error(err)
-	}
-	input.IsInit = false
-
-	spec := &pb.ChaincodeSpec{
-		Type:        pb.ChaincodeSpec_Type(pb.ChaincodeSpec_Type_value[chaincodeLang]),
-		ChaincodeId: &pb.ChaincodeID{Name: chaincodeName},
-		Input:       &input.ChaincodeInput,
-	}
-
-	// Build the ChaincodeInvocationSpec message
-	invocation := &pb.ChaincodeInvocationSpec{ChaincodeSpec: spec}
-
-	creator, err := signer.Serialize()
-	if err != nil {
-		t.Error(err)
-	}
-
-	// extract the transient field if it exists
-	var tMap map[string][]byte
-	if transient != "" {
-		if err := json.Unmarshal([]byte(transient), &tMap); err != nil {
-			t.Error(err)
-		}
-	}
-	cID := "vnpay-channel"
-	txID := ""
-
-	prop, txid, err := protoutil.CreateChaincodeProposalWithTxIDAndTransient(pcommon.HeaderType_ENDORSER_TRANSACTION, cID, invocation, creator, txID, tMap)
-	if err != nil {
-		t.Error(err)
-	}
-
-	t.Log(txid)
-
-	signedProp, err := protoutil.GetSignedProposal(prop, signer)
-	if err != nil {
-		t.Error(err)
-	}
-
-	cc, _ := grpc.Dial("peer0.org1.example.com:7051", grpc.WithInsecure())
-
-	endorser := pb.NewEndorserClient(cc)
-	mockClients := []pb.EndorserClient{endorser}
-
-	t.Run("should process a proposal for a single peer", func(t *testing.T) {
-		responses, err := processProposals(mockClients, signedProp)
-		assert.NoError(t, err)
-		assert.Len(t, responses, 0)
-		assert.Equal(t, responses[0].Response.Status, int32(200))
 	})
 }

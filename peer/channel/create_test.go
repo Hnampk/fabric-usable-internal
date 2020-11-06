@@ -19,14 +19,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Hnampk/fabric-usable-internal/peer/common"
-	"github.com/Hnampk/fabric-usable-internal/peer/common/mock"
-	"github.com/Hnampk/fabric-usable-internal/pkg/identity"
-
 	"github.com/golang/protobuf/proto"
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/hyperledger/fabric/core/config/configtest"
+	"github.com/hyperledger/fabric/internal/peer/common"
+	"github.com/hyperledger/fabric/internal/peer/common/mock"
+	"github.com/hyperledger/fabric/internal/pkg/identity"
 	msptesttools "github.com/hyperledger/fabric/msp/mgmt/testtools"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/spf13/viper"
